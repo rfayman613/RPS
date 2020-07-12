@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+    <!-- !-- https://getbootstrap.com/docs/4.0/layout/grid/ --> 
+    <!-- https://getbootstrap.com/docs/4.0/components/alerts/ -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<style>
+    .icon {
+        float: left;
+        height: 100px;
+        background: #25AEDE;
+        border-radius: 100%;
+        border: 2px solid #0F313D;
+        margin: 8%;
+    }
+
+    .icon img {
+        max-width: 100%;
+        max-height: 100%;
+        margin-top: 3px;
+    }
+
+    .container {
+        margin: 3% auto;
+        text-align: center;
+    }
+
+    #score {
+        font-size: 30px;
+        font-family: cursive;
+        color: red;
+    }
+
+    .choices {
+        display: block;
+        text-align: center;
+        margin: 5% auto;
+        width: 26%;
+    }
+
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+   
+
+</style>
+
+
+</head>
+<body>
+    <div class="container">
+    <div>
+        <h1>Rock/Paper/Scissors</h1>
+        <h3>If you've never played, follow the link to learn the rules. <a href="https://www.youtube.com/watch?v=F4uQssMXO38" class="alert-link" target="_blank"><b>How to play</b></a>. Give it a click!</h3>
+        <h2>Press r, p or s to start playing!</h2>
+    </div>
+    
+    <div id="game">
+        <div class="choices clearfix">
+            <div id="user_choice">
+            </div>
+            <div id="comp_choice">
+            </div>
+        </div>
+        <div id="score">
+            <p>Wins: <span id="wins">0</span></p>
+            <p>Losses: <span id="losses">0</span></p>
+            <p>Ties: <span id="ties">0</span></p>
+        </div>
+    </div>
+</div>
+    
+    <script type="text/javascript">
+   
+        // var userChoice = prompt("Make your selection: r, p, or s");
+        //Creates array of all computer options
+        var compOptions = ["r","p", "s"];
+        var wins = 0
+        var losses = 0
+        var ties = 0
+        var user_elm = document.querySelector('#user_choice')
+        var comp_elm = document.querySelector('#comp_choice')
+
+        document.onkeyup = function(event) {
+            var userChoice = event.key
+        var compChoice = compOptions[Math.floor(Math.random() * compOptions.length)];
+        
+        if (userChoice === `r` || userChoice === `p` || userChoice === `s`) {
+        
+            if (userChoice === `r` && compChoice === `s`) {
+            (wins++);
+            }
+            if (userChoice === `r` && compChoice === `r`) {
+            (ties++);
+            }
+            if (userChoice === `r` && compChoice === `p`) {
+            (losses++);
+            }
+            if (userChoice === `p` && compChoice === `r`) {
+            (wins++);
+            }
+            if (userChoice === `p` && compChoice === `p`) {
+            (ties++);
+            }
+            if (userChoice === `p` && compChoice === `s`) {
+            (losses++);
+            }
+            if (userChoice === `s` && compChoice === `p`) {
+            (wins++);
+            }
+            if (userChoice === `s` && compChoice === `s`) {
+            (ties++);
+            }
+            if (userChoice === `s` && compChoice === `r`) {
+            (losses++);
+            }
+        
+        //variable to store message
+        //USER PICK
+        var user_image = document.createElement('IMG')
+        user_image.setAttribute('src', `assets/images/${userChoice}.png`)
+        user_elm.innerHTML = ""
+        user_elm.appendChild(user_image)
+        user_elm.classList.add('icon')
+        
+        //COMP PICK
+        var comp_image = document.createElement('IMG')
+        comp_image.setAttribute('src', `assets/images/${compChoice}.png`)
+        comp_elm.innerHTML = ""
+        comp_elm.appendChild(comp_image)
+        comp_elm.classList.add('icon')
+
+        
+        document.querySelector('#wins').innerHTML = wins
+        document.querySelector('#losses').innerHTML = losses
+        document.querySelector('#ties').innerHTML = ties
+        
+        }
+    };
+        
+
+
+    </script>
+</body>
+</html>
